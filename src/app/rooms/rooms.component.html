@@ -4,63 +4,59 @@
 <div *ngIf="rooms.availableRooms > 0">Hello, we have rooms available</div>
 
 <div [ngSwitch]="role">
-  
-    <div *ngSwitchCase="'admin'">Welcome Admin</div>
-    <div *ngSwitchCase="'user'">Welcome User</div>
-    <div *ngSwitchDefault>Unknown</div>
-
-
-
+  <div *ngSwitchCase="'admin'">Welcome Admin</div>
+  <div *ngSwitchCase="'user'">Welcome User</div>
+  <div *ngSwitchDefault>Unknown</div>
 </div>
 
-<div *ngIf="hideRooms">
+<!-- <div *ngIf="hideRooms">
   Number of rooms:
-  <div>{{ numberOfRooms }}</div>
+  <div>{{ numberOfRooms }}</div> -->
 
+  <div [hidden]="hideRooms">
+    Number of rooms:
+    <div [innerText]="numberOfRooms"></div>
+  </div>
 
+  <div [ngClass]="hideRooms ? 'even' : 'odd'">NAMASKAR</div>
 
-<div [hidden]="hideRooms">
-  Number of rooms:
-  <div [innerText]="numberOfRooms"></div>
-</div>
-
-<div [ngClass]="hideRooms? 'even':'odd'"> NAMASKAR</div>
-
-<!-- <div *ngIf="!hideRooms">
+  <!-- <div *ngIf="!hideRooms">
     Number of rooms: <div>{{ numberOfRooms }}</div>
   </div> -->
 
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>Index</th>
-        <th>EVEN/ODD</th>
-        <th>Type</th>
-        <th>Price</th>
-        <th>Checkin</th>
-        <th>Checkout</th>
-        <th>Ammneties</th>
-        <th>Location</th>
-      </tr>
-    </thead>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>EVEN/ODD</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Checkin</th>
+          <th>Checkout</th>
+          <th>Ammneties</th>
+          <th>Location</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr
-        *ngFor="let room of roomList; let i = index; let e = even"
-        [ngStyle]="{ 'background-color': e ? 'lightblue' : 'lightgreen' }"
-      >
-        <td>{{ i }}</td>
-        <td>{{ e ? "Even " : "Odd " }}</td>
-        <td>{{ room.type }}</td>
-        <td>{{ room.price }}</td>
-        <td>{{ room.checkin }}</td>
-        <td>{{ room.checkout }}</td>
-        <td>{{ room.ammenties }}</td>
-        <td>{{ room.location }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+      <tbody>
+        <tr
+          *ngFor="let room of roomList; let i = index; let e = even"
+          [ngStyle]="{ 'background-color': e ? 'lightblue' : 'lightgreen' }"
+        >
+          <td>{{ i }}</td>
+          <td>{{ e ? "Even " : "Odd " }}</td>
+          <td>{{ room.type | uppercase}}</td>
+          <td>{{ room.price | currency: 'INR' }}</td>
+          <td>{{ room.checkin | date }}  </td>
+          <td>{{ room.checkout | date}}</td>
+          <td>{{ room.ammenties | titlecase}}</td>
+          <td>{{ room.location }}</td>
+          <td>{{room.rating | number: '1.1-3'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<button (click)="toggle()">Toggle</button>
+  <button (click)="toggle()">Toggle</button>
+

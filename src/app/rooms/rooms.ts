@@ -15,4 +15,5 @@ export interface RoomsList
     ammenties: string;
     price: number;
     location: string;
+    rating : number;
 }
