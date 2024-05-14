@@ -1,16 +1,60 @@
 <p>rooms works!</p>
-<h1>Welcome to {{hotelName}}</h1>
+<h1>Welcome to {{ hotelName }}</h1>
 
+<div *ngIf="rooms.availableRooms > 0">Hello, we have rooms available</div>
 
-<div [hidden]="flag">
+<div [ngSwitch]="role">
+  
+    <div *ngSwitchCase="'admin'">Welcome Admin</div>
+    <div *ngSwitchCase="'user'">Welcome User</div>
+    <div *ngSwitchDefault>Unknown</div>
 
-    <button (click)="increment()">+</button>
-    <button (click)="decrement()">-</button>
 </div>
 
-<div [innerText]="numberOfRooms"> 
 
-    
- </div>
 
- <button (click)="toggle()">Chalo badiya</button>
+<div [hidden]="hideRooms">
+  Number of rooms:
+  <div [innerText]="numberOfRooms"></div>
+</div>
+
+<div [ngClass]="hideRooms? 'even':'odd'"> NAMASKAR</div>
+
+<!-- <div *ngIf="!hideRooms">
+    Number of rooms: <div>{{ numberOfRooms }}</div>
+  </div> -->
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>EVEN/ODD</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Checkin</th>
+        <th>Checkout</th>
+        <th>Ammneties</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let room of roomList; let i = index; let e = even"
+        [ngStyle]="{ 'background-color': e ? 'lightblue' : 'lightgreen' }"
+      >
+        <td>{{ i }}</td>
+        <td>{{ e ? "Even " : "Odd " }}</td>
+        <td>{{ room.type }}</td>
+        <td>{{ room.price }}</td>
+        <td>{{ room.checkin }}</td>
+        <td>{{ room.checkout }}</td>
+        <td>{{ room.ammenties }}</td>
+        <td>{{ room.location }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button (click)="toggle()">Toggle</button>
