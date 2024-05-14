@@ -25,6 +25,25 @@
   </div> -->
 
   <div>
+
+    {{ roomList }}
+    <br>
+    <br>
+        
+    {{ roomList | json }}
+
+  </div>
+
+  <div>
+
+    <ul>
+      <li *ngFor="let room of roomList">
+        {{ room.type | uppercase }} - {{ room.price | currency: 'INR' }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
     <table>
       <thead>
         <tr>
@@ -41,10 +60,10 @@
 
       <tbody>
         <tr
-          *ngFor="let room of roomList; let i = index; let e = even"
+          *ngFor="let room of roomList | slice : 0-2; let i = index; let e = even"
           [ngStyle]="{ 'background-color': e ? 'lightblue' : 'lightgreen' }"
         >
-          <td>{{ i }}</td>
+          <td>{{ i}}</td>
           <td>{{ e ? "Even " : "Odd " }}</td>
           <td>{{ room.type | uppercase}}</td>
           <td>{{ room.price | currency: 'INR' }}</td>
