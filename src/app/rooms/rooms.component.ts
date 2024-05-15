@@ -1,21 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Rooms,RoomsList } from './rooms'; 
 import { CommonModule } from '@angular/common';
+import { RoomsListComponent } from "../rooms-list/rooms-list.component";
 
 @Component({
-  selector: 'hinv-rooms',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './rooms.component.html',
-  styleUrl: './rooms.component.scss'
+    selector: 'hinv-rooms',
+    standalone: true,
+    templateUrl: './rooms.component.html',
+    styleUrl: './rooms.component.scss',
+    imports: [CommonModule, RoomsListComponent]
 })
-export class RoomsComponent {
+export class RoomsComponent implements OnInit{
+
+
+   constructor() { 
+    // console.log('RoomsComponent created');
+    //Always constructor will be called first
+   }
+
+  ngOnInit(): void {
+    console.log('RoomsComponent initialized');
+    this.numberOfRooms = 3;
+  }
 
   hotelName = 'Hilton';
-  numberOfRooms = 13;
+  numberOfRooms = 13234;
   hideRooms: boolean = false;
   role: string = 'user';
-
+  roombooked: RoomsList | undefined;
   rooms: Rooms = {
     availableRooms: 10,
     bookedRooms: 5,
@@ -37,7 +49,7 @@ export class RoomsComponent {
     checkout: new Date('30-Nov-2020'),
     ammenties: 'TV, AC, Wifi',
     price: 100,
-    location: 'Bangalore',
+    location: 'Delhi',
     rating: 3.345
   },
 
@@ -54,6 +66,11 @@ export class RoomsComponent {
 
   toggle() {
     this.hideRooms = !this.hideRooms;
+  }
+
+  roomBooked(room: RoomsList) {
+    this.roombooked = room;
+    console.log('Room booked', this.roombooked);
   }
 
 }

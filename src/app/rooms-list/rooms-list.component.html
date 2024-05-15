@@ -1,0 +1,39 @@
+<p>rooms-list works!</p>
+
+
+<table>
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>EVEN/ODD</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Checkin</th>
+        <th>Checkout</th>
+        <th>Ammneties</th>
+        <th>Location</th>
+        <th>Rating</th>
+        <th>Button</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let room of roomList | slice : 0-3; let i = index; let e = even"
+        [ngStyle]="{ 'background-color': e ? 'lightblue' : 'lightgreen' }"
+      >
+        <td>{{ i}}</td>
+        <td>{{ e ? "Even " : "Odd " }}</td>
+        <td>{{ room.type | uppercase}}</td>
+        <td>{{ room.price | currency: 'INR' }}</td>
+        <td>{{ room.checkin | date }}  </td>
+        <td>{{ room.checkout | date}}</td>
+        <td>{{ room.ammenties | titlecase}}</td>
+        <td>{{ room.location }}</td>
+        <td>{{room.rating | number: '1.1-3'}}</td>
+        <td>
+          <button (click)="bookRoom(room)">Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
