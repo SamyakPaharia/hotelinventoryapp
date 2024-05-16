@@ -43,6 +43,11 @@
     </ul>
   </div> -->
 
+
+  <div>
+    <button (click)="addRoom()" >Add Room</button>
+  </div>
+
   <div>
     <hinv-rooms-list [roomList]=roomList (roomSelected)="roomBooked($event)"></hinv-rooms-list>
   </div>

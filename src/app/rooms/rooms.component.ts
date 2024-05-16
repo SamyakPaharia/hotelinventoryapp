@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Rooms,RoomsList } from './rooms'; 
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from "../rooms-list/rooms-list.component";
@@ -71,6 +71,21 @@ export class RoomsComponent implements OnInit{
   roomBooked(room: RoomsList) {
     this.roombooked = room;
     console.log('Room booked', this.roombooked);
+  }
+
+  addRoom() {
+    const room1: RoomsList = {
+      type: 'Triple',
+      checkin: new Date('14-Nov-2020'),
+      checkout: new Date('27-Nov-2020'),
+      ammenties: 'TV, AC, Wifi, pool, gym, spa',
+      price: 200,
+      location: 'Mumbai',
+      rating: 4.6
+    }
+    
+    // this.roomList.push(room1);  this will not work as it is immutable as per ChangeDetectionStrategy.OnPush
+    this.roomList = [...this.roomList, room1];  // this will work
   }
 
 }
